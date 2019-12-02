@@ -21,17 +21,17 @@ HYBRID_FLAGS=$(MPI_FLAGS) $(OPENMP_FLAGS)
 
 # Make rules
 $(PROGRAM_PREFIX).serial: game_serial.c
-	$(CC) $(CFLAGS) game_serial.c -o $(PROGRAM_PREFIX)_serial
+	$(CC) $(CFLAGS) utils.c game_serial.c -o $(PROGRAM_PREFIX)_serial
 
 $(PROGRAM_PREFIX).mpi: game_mpi.c
-	$(MPICC) $(CFLAGS) $(MPI_FLAGS) game_mpi.c -o $(PROGRAM_PREFIX)_mpi
+	$(MPICC) $(CFLAGS) $(MPI_FLAGS) utils.c  game_mpi.c -o $(PROGRAM_PREFIX)_mpi
 
 $(PROGRAM_PREFIX).openmp: $(SRCS)
-	$(CC) $(CFLAGS) $(OPENMP_FLAGS) $(SRCS) -o $(PROGRAM_PREFIX)_openmp
+	$(CC) $(CFLAGS) $(OPENMP_FLAGS) utils.c  game_openmp.c  -o $(PROGRAM_PREFIX)_openmp
 
 
 $(PROGRAM_PREFIX).hybrid: $(SRCS)
-	$(MPICC) $(CFLAGS) $(HYBRID_FLAGS) $(SRCS) -o $(PROGRAM_PREFIX)_hybrid
+	$(MPICC) $(CFLAGS) $(HYBRID_FLAGS) utils.c game_hybrid.c -o $(PROGRAM_PREFIX)_hybrid
 
 clean:
 	rm -f $(EXECUTABLES) *.o game_serial game_mpi
