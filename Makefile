@@ -20,20 +20,21 @@ MPI_FLAGS=-DMPI
 HYBRID_FLAGS=$(MPI_FLAGS) $(OPENMP_FLAGS)
 
 # Make rules
-$(PROGRAM_PREFIX).serial: $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) -o $(PROGRAM_PREFIX)_serial
+$(PROGRAM_PREFIX).serial: game_serial.c
+	$(CC) $(CFLAGS) game_serial.c -o $(PROGRAM_PREFIX)_serial
+
+$(PROGRAM_PREFIX).mpi: game_mpi.c
+	$(MPICC) $(CFLAGS) $(MPI_FLAGS) game_mpi.c -o $(PROGRAM_PREFIX)_mpi
+
 $(PROGRAM_PREFIX).openmp: $(SRCS)
 	$(CC) $(CFLAGS) $(OPENMP_FLAGS) $(SRCS) -o $(PROGRAM_PREFIX)_openmp
-
-$(PROGRAM_PREFIX).mpi: $(SRCS)
-	$(MPICC) $(CFLAGS) $(MPI_FLAGS) $(SRCS) -o $(PROGRAM_PREFIX)_mpi
 
 
 $(PROGRAM_PREFIX).hybrid: $(SRCS)
 	$(MPICC) $(CFLAGS) $(HYBRID_FLAGS) $(SRCS) -o $(PROGRAM_PREFIX)_hybrid
 
 clean:
-	rm -f $(EXECUTABLES) *.o game_serial
+	rm -f $(EXECUTABLES) *.o game_serial game_mpi
 
 serial:
 	make $(PROGRAM_PREFIX).serial
