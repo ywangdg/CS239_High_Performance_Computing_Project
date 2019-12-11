@@ -6,6 +6,7 @@
 #include <mpi.h>
 
 #include "utils.h"
+#include "utils.c"
 
 /****************
  * Main program *

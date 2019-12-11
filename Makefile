@@ -34,7 +34,7 @@ $(PROGRAM_PREFIX).hybrid: $(SRCS)
 	$(MPICC) $(CFLAGS) $(HYBRID_FLAGS) utils.c game_hybrid.c -o $(PROGRAM_PREFIX)_hybrid
 
 clean:
-	rm -f $(EXECUTABLES) *.o game_serial game_mpi
+	rm -f $(EXECUTABLES) *.o game_serial game_mpi game_hybrid game_openmp
 
 serial:
 	make $(PROGRAM_PREFIX).serial

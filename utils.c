@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern int MINIMUM_ROWS;
-extern int MINIMUM_COLUMNS;
-extern int MINIMUM_TIME_STEPS;
+extern const int MINIMUM_ROWS;
+extern const int MINIMUM_COLUMNS;
+extern const int MINIMUM_TIME_STEPS;
 
 void exit_if(int boolean_expression, char function_name[32], int OUR_RANK)
 {
